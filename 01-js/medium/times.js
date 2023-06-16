@@ -6,7 +6,19 @@ Try running it for
 3. Sum from 1-1000000000
 Hint - use Date class exposed in JS
 */
-
 function calculateTime(n) {
-    return 0.01;
+
+    var t1 = Date.now()
+    calcSum(n)
+    return (Date.now() - t1)/1000
+}
+
+function calcSum(n){
+    var sum = 0
+    for (var i = 1; i <=  n; i++){
+
+        sum += i
+    }
+
+    // console.log(`Sum from 1-${n} = ${sum}`)
 }
