@@ -17,6 +17,108 @@
   - `npm run test-calculator`
 */
 
-class Calculator {}
+class Calculator {
+
+    constructor(){
+        this.result = 0
+    }
+
+    add(a){
+        this.result += a
+    }
+
+    subtract(a) {
+        this.result -= a
+    }
+    multiply(a) {
+        this.result *= a
+    }
+    divide(a){
+        this.result /= a
+    }
+
+    clear(){
+        this.result = 0
+    }
+
+    getResult(){
+        return this.result
+    }
+    
+    calculate(str1){
+
+        str1 = str1.trim()
+        str1 = str1.replaceAll(" ","")
+        // console.log(str1)
+        var oparr = []
+        var operations = [ "(", ")","/","*","+","-"]
+        var num = ""
+        for (var i = 0; i < str1.length; i++){
+            if (operations.includes(str1[i])){
+                oparr.push(num)
+                oparr.push(str1[i])
+                num =""
+            }else{
+
+                num += str1[i]
+            }
+        }
+        oparr.push(num)
+        // console.log(oparr)
+        for (var i = 0; i < operations.length; i++){
+            var currop = operations[i]
+            while (oparr.indexOf(currop) != -1){
+
+                var op1 = parseInt(oparr[oparr.indexOf(currop) - 1])
+                var op2 = parseInt(oparr[oparr.indexOf(currop) + 1])
+                var ops = oparr[oparr.indexOf(currop)]
+                // console.log(ops)
+                switch (ops) {
+                    case "/":
+                        this.result = op1
+                        this.divide(op2)
+                        // console.log(this.getResult())
+                        break;
+                    case "*":
+                        this.result = op1
+                        this.multiply(op2)
+                        // console.log(this.getResult())
+                        break;
+                    case "+":
+                        this.result = op1
+                        this.add(op2)  
+                        // console.log(this.getResult()) 
+                        break;
+                    case "-":
+                        this.result = op1
+                        this.subtract(op2)  
+                        // console.log(this.getResult())  
+                        break;  
+                    default:
+
+                        // this.clear()
+                        break;
+
+                }
+                oparr.splice(oparr.indexOf(currop) - 1, 3, this.result)
+                // this.clear()
+
+            }
+
+        }
+        
+    }
+
+}
+
+
+const calc1 = new Calculator()
+// calc1.add(3)
+// calc1.add(5)
+// calc1.multiply(5)
+// var a = calc1.getResult()
+// calc1.clear()
+calc1.calculate("2 * 3 - 6 / 3 * 4")
+console.log(calc1.getResult())class Calculator {}
 
 module.exports = Calculator;
