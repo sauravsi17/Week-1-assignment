@@ -7,7 +7,16 @@
 */
 
 function isPalindrome(str) {
-  return true;
-}
+
+    strLength = str.length
+    var strNew = ""
+
+    for (var i = strLength - 1; i >= 0; i--){
+        strNew += str[i]
+    }
+
+    return (str === strNew)
+   
+  }
 
 module.exports = isPalindrome;
